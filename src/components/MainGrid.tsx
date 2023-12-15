@@ -1,11 +1,10 @@
-import React from "react";
-import Card from "./Card";
+import MovieInfo from "./MovieInfo";
 
 const MainGrid = () => {
   return (
     <>
       <ul>
-        <Card />
+        <MovieInfo />
       </ul>
     </>
   );
