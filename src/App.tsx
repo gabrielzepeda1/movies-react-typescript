@@ -20,6 +20,9 @@ function App() {
 
   return (
     <div className="App">
+      <p>
+        JSON Data Visualization
+      </p>
         <pre>{JSON.stringify({ data }, null, 2)}</pre>
     </div>
   
