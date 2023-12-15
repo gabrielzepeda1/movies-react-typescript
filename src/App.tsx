@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
+import MovieInfo from './components/MovieInfo';
 
 const apiKey = process.env.REACT_APP_OMDB_API_KEY;
 
@@ -9,7 +10,7 @@ function App() {
   
   useEffect(() => { 
 
-    fetch(`http://www.omdbapi.com/?apikey=${apiKey}&s=batman`, { 
+    fetch(`http://www.omdbapi.com/?apikey=${apiKey}&s=superman`, { 
       method: "GET"
     })
     .then((response: any) => response.json())
@@ -20,10 +21,12 @@ function App() {
 
   return (
     <div className="App">
-      <p>
+      <h1>
         JSON Data Visualization
-      </p>
-        <pre>{JSON.stringify({ data }, null, 2)}</pre>
+      </h1>
+        <div className='d-flex'>
+          <MovieInfo data={data} />
+        </div>
     </div>
   
   );
