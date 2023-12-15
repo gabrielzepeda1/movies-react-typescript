@@ -18,9 +18,11 @@ function App() {
     });
   }, [])
 
-  
   return (
     <div className="App">
+      <p>
+        Data Visualization
+      </p>
         <pre>{JSON.stringify({ data }, null, 2)}</pre>
     </div>
   
