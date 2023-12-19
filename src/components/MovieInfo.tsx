@@ -23,17 +23,16 @@ const MovieInfo: React.FC<MovieInfoProps> = ({ data }) => {
           const { Title, Year, Type, Poster } = item
           const icon = Type === 'movie' ? <BiCameraMovie /> : <PiTelevisionSimple />
           return (
-            <div className="col-4">
+            <div key={i} className="col-4">
               <div className="card text-white bg-dark mb-3 m-2">
                 <img
                   className="card-img-top"
-                  key={i}
                   src={Poster}
                   alt={Title}
                 />
                 <div className="card-body">
-                  <div className="card-title lead text-uppercase">{Title}</div>
-                  <p className="card-text">Released on: {Year}</p>
+                  <div className="card-title lead text-uppercase mb-1">{Title}</div>
+                  <p className="card-text mb-1">Released on: {Year}</p>
                   <p className="card-text">{icon} {Type}</p>
                 </div>
               </div>
