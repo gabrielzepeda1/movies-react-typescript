@@ -22,7 +22,7 @@ function App() {
   return (
     <div className="App">
       <h1>
-        JSON Data Visualization
+        React Movie App 
       </h1>
         <div className='d-flex'>
           <MovieInfo data={data} />
