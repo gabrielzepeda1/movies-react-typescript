@@ -1,22 +1,22 @@
-import React, { createContext, useState, ReactNode } from "react";
+import React, { createContext, useState } from "react";
 
 interface Data {
   name: string;
-  edad: string;
+  age: string;
 }
 
 interface DataContextProps {
   data: Data;
-  setData: React.Dispatch<React.SetStateAction<Data>>;
+  updateData: (data: Data) => void;
 }
 
 const dataFixed: Data = {
   name: "Gabriel",
-  edad: "22",
+  age: "22",
 };
 
 interface DataProviderProps {
-  children: ReactNode;
+  children: JSX.Element | JSX.Element[];
 }
 
 export const DataContext = createContext<DataContextProps | undefined>(
@@ -25,8 +25,13 @@ export const DataContext = createContext<DataContextProps | undefined>(
 
 const DataProvider = ({ children }: DataProviderProps) => {
   const [data, setData] = useState<Data>(dataFixed);
+  
+  const updateData = (data: Data) => {
+    setData(data);
+  };
+
   return (
-    <DataContext.Provider value={{ data, setData }}>
+    <DataContext.Provider value={{ data, updateData }}>
       {children}
     </DataContext.Provider>
   );
