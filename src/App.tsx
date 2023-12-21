@@ -1,34 +1,26 @@
-import { useEffect, useState } from 'react';
-import './App.css';
-import MovieInfo from './components/MovieInfo';
-
-const apiKey = process.env.REACT_APP_OMDB_API_KEY;
+import { useContext, useEffect, useState } from "react";
+import "./App.css";
+import MovieInfo from "./components/MovieInfo";
+import DataProvider, { DataContext } from "./context/DataContext";
 
 function App() {
-  
-  const [data, setData] = useState([]);
-  
-  useEffect(() => { 
+  const context = useContext(DataContext);
+  console.log(context?.data)
 
-    fetch(`http://www.omdbapi.com/?apikey=${apiKey}&s=superman`, { 
-      method: "GET"
-    })
-    .then((response: any) => response.json())
-    .then((data: any) => { 
-      setData(data.Search || []);
-    });
-  }, [])
+  useEffect(() => {
+    context?.fetchMovie();
+  }, [context]);
 
   return (
-    <div className="App">
-      <h1>
-        React Movie App 
-      </h1>
-        <div className='d-flex'>
-          <MovieInfo data={data} />
+    <DataProvider>
+      <div className="App">
+        <h1>React Movie App</h1>
+        <div className="d-flex">
+          {/* {context?.data && <MovieInfo data={context?.data} />} */ }
+          gabriel 
         </div>
-    </div>
-  
+      </div>
+    </DataProvider>
   );
 }
 

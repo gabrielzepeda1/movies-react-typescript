@@ -1,23 +1,12 @@
 import React from "react";
 import { BiCameraMovie, BiTv } from "react-icons/bi";
-
-export type MovieInfoProps = {
-  data: DataChildren[];
-};
-
-export type DataChildren = {
-  Title: string;
-  Year: string;
-  imdbID: string;
-  Type: string;
-  Poster: string;
-};
+import { MovieInfoProps } from "../customTypes";
 
 const MovieInfo: React.FC<MovieInfoProps> = ({ data }) => {
   return (
     <div className="container">
       <div className="row justify-content-between">
-        {data.map(({ Title, Year, Type, Poster }, i) => {
+        {data.map(({ title, year, type, poster }, i) => {
           return (
             <div key={i} className="col-4 my-2">
               <div
@@ -27,19 +16,19 @@ const MovieInfo: React.FC<MovieInfoProps> = ({ data }) => {
                 <img 
                   style={{height: "80%"}}
                   className="card-img-top" 
-                  src={Poster} 
-                  alt={Title} />
+                  src={poster} 
+                  alt={title} />
                 <div className="card-body d-flex flex-column justify-content-center">
                   <div className="card-title lead text-uppercase h4 fs-6">
-                    {Title}
+                    {title}
                   </div>
                   <p className="card-text fs-6 text-success h5">
-                    Released on: {Year}
+                    Released on: {year}
                   </p>
                   <p className="card-text text-warning align-items-center d-flex justify-content-center">
-                    {Type === "movie" ? <BiCameraMovie /> : <BiTv />}
+                    {type === "movie" ? <BiCameraMovie /> : <BiTv />}
                     <span className="mx-1 text-info text-capitalize fs-6">
-                      {Type}
+                      {type}
                     </span>
                   </p>
                 </div>
