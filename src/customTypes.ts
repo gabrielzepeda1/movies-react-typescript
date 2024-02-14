@@ -1,7 +1,9 @@
 import { Dispatch, SetStateAction } from "react";
+
 export type MovieInfoProps = {
   data: DataChildren[];
 };
+
 export type DataChildren = {
   title: string;
   year: string;
@@ -9,6 +11,7 @@ export type DataChildren = {
   type: string;
   poster: string;
 };
+
 export interface DataContextProps {
   data: DataChildren[];
   fetchMovie: () => void;
@@ -16,12 +19,16 @@ export interface DataContextProps {
   setQueryParam: Dispatch<SetStateAction<string>>;
   fetchError: string;
   setFetchError: Dispatch<SetStateAction<string>>;
-}
+};
+
 export interface DataProviderProps {
   children: JSX.Element | JSX.Element[];
-}
+};
+
 export type ChangeEvent = React.ChangeEvent<HTMLInputElement>;
+
 export type ButtonClickEvent = React.MouseEvent<HTMLButtonElement>;
+
 export type ErrorAlertProps = {
   alertErrorMessage: string | null;
 };

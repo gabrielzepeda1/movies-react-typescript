@@ -1,6 +1,7 @@
 import React from "react";
 import { BiCameraMovie, BiTv } from "react-icons/bi";
 import { MovieInfoProps } from "../customTypes";
+
 const MovieInfo: React.FC<MovieInfoProps> = ({ data }) => {
   return (
     <div className="container">

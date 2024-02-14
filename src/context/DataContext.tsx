@@ -5,7 +5,9 @@ import {
   DataProviderProps,
 } from "../customTypes";
 import { convertToLowerCase } from "../helpers";
+
 const apiKey = process.env.REACT_APP_OMDB_API_KEY;
+
 export const DataContext = createContext<DataContextProps>({
   data: [],
   fetchMovie: () => {},
@@ -14,11 +16,16 @@ export const DataContext = createContext<DataContextProps>({
   fetchError: "",
   setFetchError: () => {},
 });
+
 const DataProvider = ({ children }: DataProviderProps) => {
   const [data, setData] = useState<DataChildren[]>([]);
+
   const [queryParam, setQueryParam] = useState<string>("superman");
+
   const [fetchError, setFetchError] = useState<string>("");
+
   const apiUrl = "http://www.omdbapi.com/?apikey=";
+
   const fetchMovie = useCallback(async () => {
     try {
       const response = await fetch(
@@ -27,11 +34,14 @@ const DataProvider = ({ children }: DataProviderProps) => {
           method: "GET",
         }
       );
+
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
+
       const data = await response.json();
       const { Search } = data;
+
       if (Search) {
         const transformedResponse = Search.map((item: DataChildren) => {
           return convertToLowerCase(item);
@@ -45,6 +55,7 @@ const DataProvider = ({ children }: DataProviderProps) => {
       setFetchError("An unexpected error occurred while fetching the data!");
     }
   }, [queryParam]);
+
   useEffect(() => {
     fetchMovie();
   }, [fetchMovie, queryParam]);
