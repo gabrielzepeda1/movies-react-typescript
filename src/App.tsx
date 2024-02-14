@@ -4,16 +4,23 @@ import MovieInfo from "./components/MovieInfo";
 import { DataContext } from "./context/DataContext";
 import { ButtonClickEvent, ChangeEvent } from "./customTypes";
 import ErrorAlert from "./components/ErrorAlert";
+
+
 function App() {
   const { data, queryParam, setQueryParam, fetchError } =
     useContext(DataContext);
+
   const [searchValue, setSearchValue] = useState<string>("");
+
   const handleSearchInputChange = (e: ChangeEvent) => {
-    setSearchValue(e.target.value);
+    const { value } = e.target
+    setSearchValue(value);
   };
+
   const handleFetchButtonClick = (_event: ButtonClickEvent) => {
     setQueryParam(searchValue);
   };
+  
   return (
     <div className="App">
       <div className="container">
