@@ -1,32 +1,71 @@
-import { useEffect, useState } from 'react';
-import './App.css';
+import { useContext, useState } from "react";
+import "./App.css";
+import MovieInfo from "./components/MovieInfo";
+import { DataContext } from "./context/DataContext";
+import { ButtonClickEvent, ChangeEvent } from "./customTypes";
+import ErrorAlert from "./components/ErrorAlert";
 
-const apiKey = process.env.REACT_APP_OMDB_API_KEY;
 
 function App() {
-  
-  const [data, setData] = useState([]);
-  
-  useEffect(() => { 
+  const { data, queryParam, setQueryParam, fetchError } =
+    useContext(DataContext);
 
-    fetch(`http://www.omdbapi.com/?apikey=${apiKey}&s=batman`, { 
-      method: "GET"
-    })
-    .then((response: any) => response.json())
-    .then((data: any) => { 
-      setData(data.Search || []);
-    });
-  }, [])
+  const [searchValue, setSearchValue] = useState<string>("");
+
+  const handleSearchInputChange = (e: ChangeEvent) => {
+    const { value } = e.target
+    setSearchValue(value);
+  };
+
+  const handleFetchButtonClick = (_event: ButtonClickEvent) => {
+    setQueryParam(searchValue);
+  };
+  
+  const handleEnterKey = (event: React.KeyboardEvent) => { 
+    if (event.key === "Enter") { 
+      setQueryParam(searchValue);
+    }
+  }
 
   return (
     <div className="App">
-      <p>
-        Data Visualization
-      </p>
-        <pre>{JSON.stringify({ data }, null, 2)}</pre>
+      <div className="container">
+        <h1>React Movie App</h1>
+        <p>
+          Showing results for <span className="text-warning">{queryParam}</span>
+        </p>
+        <div className="px-4 input-group mb-3">
+          <input
+            onKeyDown={(e: React.KeyboardEvent) => handleEnterKey(e) }
+            onChange={handleSearchInputChange}
+            type="text"
+            className="form-control"
+            placeholder="Type your search"
+            aria-label="Fetch Data"
+            aria-describedby="button-addon2"
+          />
+          <button
+            className="btn btn-primary w-25"
+            type="button"
+            id="button-addon2"
+            onClick={handleFetchButtonClick}
+          >
+            Search
+          </button>
+        </div>
+        {fetchError ? (
+          <ErrorAlert alertErrorMessage={fetchError} />
+        ) : (
+          <div className="d-flex">
+            {data.length > 0 ? (
+              <MovieInfo data={data} />
+            ) : (
+              <h1 className="lead text-info">No results found...</h1>
+            )}
+          </div>
+        )}
+      </div>
     </div>
-  
   );
 }
-
 export default App;

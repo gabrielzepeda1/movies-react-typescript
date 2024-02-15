@@ -1,3 +1,17 @@
+# React Movie App 
+
+This is a Movies App built with React and TypeScript, utilizing the Context API for state management. The app allows users to search for movies and displays a list of movies based on the search input. 
+
+## Features
+
+- **React and TypeScript**: The project is built using React, as a front-end framefork for JavaScript, and TypeScript, a statically typed superset of JavaScript.
+  
+- **Context API**: State management is handled using React's Context API, making it easy to manage and share state across different components.
+
+- **Movie Search**: Users can search for movies by entering a search criteria, and the app will fetch and display a list of movies matching the search.
+
+- **Responsive Design**: The app is designed to be responsive, providing a seamless experience across different screen sizes.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
