@@ -21,6 +21,12 @@ function App() {
     setQueryParam(searchValue);
   };
   
+  const handleEnterKey = (event: React.KeyboardEvent) => { 
+    if (event.key === "Enter") { 
+      setQueryParam(searchValue);
+    }
+  }
+
   return (
     <div className="App">
       <div className="container">
@@ -30,6 +36,7 @@ function App() {
         </p>
         <div className="px-4 input-group mb-3">
           <input
+            onKeyDown={(e: React.KeyboardEvent) => handleEnterKey(e) }
             onChange={handleSearchInputChange}
             type="text"
             className="form-control"
